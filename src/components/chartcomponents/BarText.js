@@ -13,6 +13,7 @@ export default class BarText extends Component {
             </div>
           ))
         }
+        <div className="y-axis">Y - Axis</div>
       </div>
     )
   }

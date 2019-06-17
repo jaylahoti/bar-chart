@@ -14,6 +14,7 @@ export default class Markers extends Component {
            </span>
           ))
         }
+        <div className="x-axis">X - Axis</div>
       </div>
     )
   }

@@ -19,39 +19,21 @@ export default class Graph extends Component {
     ))
   }
 
-  renderBars() {
-    const { currencies } = this.props;
-    const { isHovered } = this.state;
-
-    function handleMouseEnter(index) {
-      this.setState(prevState => {
-        return { isHovered: { ...prevState.isHovered, [index]: true } };
-      });
-    };
-
-    function handleMouseLeave(index) {
-      this.setState(prevState => {
-        return { isHovered: { ...prevState.isHovered, [index]: false } };
-      });
-    };
-
-    return currencies.map((currency, index) => {
-      const percent = (currency.rate / 100) * 100;
-      return (
-        <Bar
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-          percent={percent}
-          isHovering={isHovered[index]}
-          key={currency.currency}
-          color={currency.color}
-          currency={currency}
-        />
-      )
+   handleMouseEnter = (index) => {
+    this.setState(prevState => {
+      return { isHovered: { ...prevState.isHovered, [index]: true } };
     });
-  }
+  };
+
+  handleMouseLeave = (index) => {
+    this.setState(prevState => {
+      return { isHovered: { ...prevState.isHovered, [index]: false } };
+    });
+  };
 
   render(){
+    const { currencies } = this.props;
+    const { isHovered } = this.state;
     return(
       <div className="graph-wrapper">
         <h2> { this.props.graphTitle } </h2>
@@ -61,7 +43,21 @@ export default class Graph extends Component {
 
           <div id="ssbar" className="bar-lines-container">
             { this.renderLines() }
-            { this.renderBars() }
+            { currencies.map((currency, index) => {
+                const percent = (currency.rate / 100) * 100;
+                return (
+                  <Bar
+                    onMouseEnter={() => this.handleMouseEnter(index)}
+                    onMouseLeave={() => this.handleMouseLeave(index)}
+                    percent={percent}
+                    isHovering={isHovered[index]}
+                    key={currency.currency}
+                    color={currency.color}
+                    currency={currency}
+                  />
+                )
+              })
+            }
           </div>
 
           <div style={{ width: '12%' }} />

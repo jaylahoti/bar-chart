@@ -16,6 +16,15 @@ h2 {
   z-index: 100;
 }
 
+.x-axis {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.y-axis {
+  text-align: center;
+}
+
 .graph {
   position: relative;
   max-width: 800px;
