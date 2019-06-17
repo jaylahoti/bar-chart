@@ -6,7 +6,9 @@ import Bar from '../chartcomponents/Bar';
 
 export default class Graph extends Component {
 
-  state = {}
+  state = {
+    isHovered: {}
+  }
 
   renderLines() {
     return Array(10).fill(null).map((el, i) => (
@@ -19,12 +21,28 @@ export default class Graph extends Component {
 
   renderBars() {
     const { currencies } = this.props;
+    const { isHovered } = this.state;
 
-    return currencies.map((currency) => {
+    function handleMouseEnter(index) {
+      this.setState(prevState => {
+        return { isHovered: { ...prevState.isHovered, [index]: true } };
+      });
+    };
+
+    function handleMouseLeave(index) {
+      this.setState(prevState => {
+        return { isHovered: { ...prevState.isHovered, [index]: false } };
+      });
+    };
+
+    return currencies.map((currency, index) => {
       const percent = (currency.rate / 100) * 100;
       return (
         <Bar
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={() => handleMouseLeave(index)}
           percent={percent}
+          isHovering={isHovered[index]}
           key={currency.currency}
           color={currency.color}
           currency={currency}
