@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Graph from './components/graph/Graph';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+
+  constructor(props){
+  		super(props);
+          this.state = {
+           currencies: [
+             {
+               currency: 'Dollar',
+               rate: 69.83,
+               color: 'green'
+             },
+             {
+               currency: 'Euro',
+               rate: 78.28,
+               color: 'blue'
+             },
+             {
+               currency: 'Canadian Dollar',
+               rate: 52.07,
+               color: 'red'
+             },
+             {
+               currency: 'Singapore Dollar',
+               rate: 50.94,
+               color: 'orange'
+             },
+             {
+               currency: 'British Pounds',
+               rate: 87.87,
+               color: 'cyan'
+             },
+             {
+               currency: 'UAE Dhiram',
+               rate: 19.02,
+               color: 'yellow'
+             }
+           ]
+         }
 }
 
-export default App;
+render(){
+
+    return (
+      <div>
+        <Graph
+            currencies={this.state.currencies}
+            graphTitle="Indian Rupee Rate with Foreign Currencies"
+        />
+      </div>
+    );
+  }
+}
